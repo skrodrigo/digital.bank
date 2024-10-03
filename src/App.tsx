@@ -25,6 +25,8 @@ function App() {
 	const [aceitaTermos, setAceitaTermos] = useState(false); // Estado para rastrear se os termos foram aceitos
 	// Define o estado para a mensagem de sucesso
 	const [sucesso, setSucesso] = useState(false); // Estado para rastrear a mensagem de sucesso
+	// Define o estado para a mensagem personalizada após clicar no botão
+	const [mensagemConta, setMensagemConta] = useState(''); // Estado para a mensagem personalizada
 
 	// Função para alternar a visibilidade da senha
 	function handleMostraSenha() {
@@ -62,6 +64,13 @@ function App() {
 		setAceitaTermos(event.target.checked); // Atualiza o estado com base no checkbox
 	}
 
+	// Função para lidar com o clique no botão "Abra sua conta"
+	function handleAbrirConta() {
+		if (aceitaTermos) {
+			setMensagemConta(`Obrigado ${camposPreenchidos.nome}, por abrir sua conta! Você receberá no email: ${camposPreenchidos.email}, detalhes sobre o recebimento do cartão.`); // Define a mensagem personalizada
+		}
+	}
+
 	// Retorna o JSX do componente
 	return (
 		<main className="flex">
@@ -71,8 +80,8 @@ function App() {
 					<Logo />
 					<Title />
 					<small
-					>&copy; Criado por Jose Rodrigo, Matrícula:
-						37022019</small>
+					>&copy; Criado por Jose Rodrigo e Samuel Victor, Matrícula:
+						37022019 , 37016870</small>
 				</div>
 
 			</aside>
@@ -121,10 +130,13 @@ function App() {
 					</div>
 
 					<div className="flex">
-						<button className="botao" disabled={!aceitaTermos}> {/* Desabilita o botão se os termos não forem aceitos */}
+						<button className="botao" disabled={!aceitaTermos} onClick={handleAbrirConta}> {/* Desabilita o botão se os termos não forem aceitos */}
 							{aceitaTermos ? 'Abra sua conta' : 'Aceite os termos'} {/* Altera o texto do botão com base na aceitação dos termos */}
 						</button>
 					</div>
+
+					{/* Exibe a mensagem personalizada abaixo do botão */}
+					{mensagemConta && <div className="mensagem-conta">{mensagemConta}</div>}
 
 				</div>
 			</div>
