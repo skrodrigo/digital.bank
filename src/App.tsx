@@ -16,9 +16,9 @@ function App() {
 	const [progresso, setProgresso] = useState(0);
 	// Define o estado para verificar se os campos estão preenchidos
 	const [camposPreenchidos, setCamposPreenchidos] = useState({
-		nome: false,
+		nome: '',
 		telefone: false,
-		email: false,
+		email: '',
 		senha: false,
 	});
 	// Define o estado para verificar se os termos foram aceitos
@@ -39,8 +39,7 @@ function App() {
 
 		// Atualiza se o campo está preenchido ou não
 		setCamposPreenchidos(prev => {
-			const isPreenchido = value.length > 0;
-			return { ...prev, [id]: isPreenchido };
+			return { ...prev, [id]: value }; // Armazena o valor do campo
 		});
 
 		// Atualiza o progresso baseado nos campos preenchidos
